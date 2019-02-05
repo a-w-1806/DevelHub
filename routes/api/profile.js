@@ -38,6 +38,67 @@ router.get(
   }
 );
 
+// @route   GET api/profile/all
+// @desc    Get all profiles
+// @access  Public
+router.get("/all", (req, res) => {
+  const errors = {};
+
+  Profile.find()
+    .populate("user", ["name", "avatar"])
+    .then(profiles => {
+      if (!profiles) {
+        errors.noprofile = "There are no profiles";
+        return res.status(404).json(errors);
+      }
+
+      res.json(profiles);
+    })
+    .catch(err => res.status(404).json({ profile: "There are no profiles" }));
+});
+
+//  @route  GET api/profile/handle/:handle
+// This is backend API. The url shown in the browser does not have to be like this.
+//  @desc   Get profile by handle.
+//  @access Public
+router.get("/handle/:handle", (req, res) => {
+  const errors = {};
+
+  Profile.findOne({ handle: req.params.handle })
+    .populate("user", ["name", "avatar"])
+    .then(profile => {
+      if (!profile) {
+        errors.noprofile = "There is no profile for this user.";
+        return res.status(404).json(errors);
+      } else {
+        res.json(profile);
+      }
+    })
+    .catch(err => res.status(400).json(err));
+});
+
+//  @route  GET api/profile/user/:user_id
+// This is for development purposes only.
+//  @desc   Get profile by user_id.
+//  @access Public
+router.get("/user/:user_id", (req, res) => {
+  const errors = {};
+
+  Profile.findOne({ user: req.params.user_id })
+    .populate("user", ["name", "avatar"])
+    .then(profile => {
+      if (!profile) {
+        errors.noprofile = "There is no profile for this user.";
+        return res.status(404).json(errors);
+      } else {
+        res.json(profile);
+      }
+    })
+    .catch(err =>
+      res.status(400).json({ noprofile: "There is no profile fot this user. " })
+    );
+});
+
 // @route   POST api/profile
 // @desc    Create or edit user profile
 // @access  Private
