@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 export default class Register extends Component {
   constructor() {
@@ -29,6 +30,12 @@ export default class Register extends Component {
       password2: this.state.password2
     };
     console.log(newUser);
+
+    // Do not write localhost:5000 because of the `proxy` value in client/package.json.
+    axios
+      .post("api/users/register", newUser)
+      .then(res => console.log(res))
+      .catch(err => console.log(err.response.data));
   }
 
   render() {
