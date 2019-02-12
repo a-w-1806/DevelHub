@@ -1,6 +1,6 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
-import axios from "axios";
 import classnames from "classnames";
 import { connect } from "react-redux";
 
@@ -21,6 +21,12 @@ class Register extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
   // Those onXXX methods are callbacks. When set as callbacks, the `this` is completely lost. However, you can set it forcefully using `bind()`.
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -36,20 +42,11 @@ class Register extends Component {
     };
     console.log(newUser);
 
-    // Do not write localhost:5000 because of the `proxy` value in client/package.json.
-    // axios
-    //   .post("api/users/register", newUser)
-    //   .then(res => console.log(res))
-    //   .catch(err => this.setState({ errors: err.response.data }));
-    this.props.registerUser(newUser);
+    this.props.registerUser(newUser, this.props.history);
   }
 
   render() {
     const { errors } = this.state;
-    const { user } = this.props.auth;
-    if (user) {
-      console.log(user.name);
-    }
     return (
       <div className="register">
         <div className="container">
@@ -135,7 +132,8 @@ class Register extends Component {
 
 Register.propTypes = {
   registerUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -143,10 +141,11 @@ const mapStateToProps = state => ({
   Left auth: can access using this.props.auth
   Right auth: key value in rootReducer
   */
-  auth: state.auth
+  auth: state.auth,
+  errors: state.errors
 });
 
 export default connect(
   mapStateToProps,
   { registerUser }
-)(Register);
+)(withRouter(Register));
