@@ -1,8 +1,12 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 import classnames from "classnames";
+import { connect } from "react-redux";
 
-export default class Register extends Component {
+import { registerUser } from "../../actions/authActions";
+
+class Register extends Component {
   constructor() {
     super();
     this.state = {
@@ -33,14 +37,19 @@ export default class Register extends Component {
     console.log(newUser);
 
     // Do not write localhost:5000 because of the `proxy` value in client/package.json.
-    axios
-      .post("api/users/register", newUser)
-      .then(res => console.log(res))
-      .catch(err => this.setState({ errors: err.response.data }));
+    // axios
+    //   .post("api/users/register", newUser)
+    //   .then(res => console.log(res))
+    //   .catch(err => this.setState({ errors: err.response.data }));
+    this.props.registerUser(newUser);
   }
 
   render() {
     const { errors } = this.state;
+    const { user } = this.props.auth;
+    if (user) {
+      console.log(user.name);
+    }
     return (
       <div className="register">
         <div className="container">
@@ -123,3 +132,21 @@ export default class Register extends Component {
     );
   }
 }
+
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  /*
+  Left auth: can access using this.props.auth
+  Right auth: key value in rootReducer
+  */
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { registerUser }
+)(Register);
