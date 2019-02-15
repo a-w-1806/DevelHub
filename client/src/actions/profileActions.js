@@ -5,7 +5,8 @@ import {
   PROFILE_LOADING,
   CLEAR_CURRENT_PROFILE,
   GET_ERRORS,
-  SET_CURRENT_USER
+  SET_CURRENT_USER,
+  CLEAR_ERRORS
 } from "./types";
 
 // Get current profile
@@ -61,6 +62,9 @@ export const deleteAccount = () => dispatch => {
 // Create Profile.
 // We need history to do redirecting.
 export const createProfile = (profileData, history) => dispatch => {
+  dispatch({
+    type: CLEAR_ERRORS
+  });
   axios
     .post("/api/profile", profileData)
     .then(res => history.push("/dashboard"))
