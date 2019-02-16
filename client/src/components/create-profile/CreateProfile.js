@@ -181,7 +181,7 @@ class CreateProfile extends Component {
                   onChange={this.onChange}
                   error={errors.skills}
                   info="Please use comma separated values (eg.
-                    HTML,CSS,JavaScript,PHP"
+                    HTML,CSS,JavaScript,PHP)"
                 />
                 <TextFieldGroup
                   placeholder="Github Username"
