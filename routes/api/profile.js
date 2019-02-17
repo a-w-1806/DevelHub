@@ -129,7 +129,7 @@ router.post(
       profileFields.githubusername = req.body.githubusername;
     // Skills - Spilt into array
     if (typeof req.body.skills !== "undefined") {
-      profileFields.skills = req.body.skills.split(",");
+      profileFields.skills = req.body.skills.replace(/\s/g, "").split(",");
     }
 
     // Social
