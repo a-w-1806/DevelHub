@@ -5,10 +5,12 @@ import {
   POST_LOADING,
   GET_POSTS,
   DELETE_POST,
-  GET_POST
+  GET_POST,
+  CLEAR_ERRORS
 } from "./types";
 
 export const addPost = postData => dispatch => {
+  dispatch({ type: CLEAR_ERRORS });
   axios
     .post("/api/posts", postData)
     .then(res =>
@@ -108,6 +110,7 @@ export const removeLike = id => dispatch => {
 
 // Add Comment
 export const addComment = (postId, commentData) => dispatch => {
+  dispatch({ type: CLEAR_ERRORS });
   axios
     .post(`/api/posts/comment/${postId}`, commentData)
     .then(res =>
