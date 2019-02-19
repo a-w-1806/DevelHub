@@ -2,13 +2,13 @@
 
 https://develhub.herokuapp.com
 
-**Attention**: If you have trouble opening this web page, please refresh the page to try again since heroku apps hibernate if there is no traffic for a certain time.
+**Attention**: If you have trouble opening this web page, please refresh the page to try again since heroku apps hibernate if there is no traffic for a period of time.
 
 The front end code is in the [`/client`](https://github.com/Yuchen-Wang-SH/DevelHub/tree/master/client) folder.
 
 ## Main Functionalities
 
-- Register an account, and build your profile by adding basic information, experiences, education, and social network links.
+- Register an account, and build your profile by adding basic information, experiences, educations, and social network links.
 - See other users' profiles by accessing their own pages.
 - Release or delete posts, like or dislike posts, and make your comments.
 
@@ -17,10 +17,10 @@ The front end code is in the [`/client`](https://github.com/Yuchen-Wang-SH/Devel
 - A **RESTful** back end written in **Node.js**, using **Express**.
   - Store data in **MongoDB**, and connect to it using **Mongoose**.
   - User authentication using **JSON Web Tokens (JWT)**.
-  - Encrypt passwords using **bcrypt.js** before being stored.
+  - Encrypt passwords using **bcrypt.js** before storing.
 - A front end UI written using **React**.
   - Manage the state of the whole application using **Redux**.
-  - Get latest 5 repos from registered user through **Github API**.
+  - Get latest five repos from registered users through **Github API**.
 
 ## Back end routes
 
