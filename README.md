@@ -1,10 +1,10 @@
 # DevelHub: A Social Network for Developers
 
-https://develhub.herokuapp.com
+<a href="https://develhub.herokuapp.com" target="_blank">https://develhub.herokuapp.com</a>
 
 **Attention**: If you have trouble opening this web page, please refresh the page to try again since heroku apps hibernate if there is no traffic for a period of time.
 
-The front end code is in the [`/client`](https://github.com/Yuchen-Wang-SH/DevelHub/tree/master/client) folder.
+The front end code is in the <a href="https://github.com/Yuchen-Wang-SH/DevelHub/tree/master/client" target="_blank">`/client`</a> folder.
 
 ## Main Functionalities
 
