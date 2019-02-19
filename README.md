@@ -31,7 +31,7 @@ The front end code is in the [`/client`](https://github.com/Yuchen-Wang-SH/Devel
 ```javascript
 reqBody = { name, email, password, password2 };
 // Success 200.
-res.data = { name, email, password };
+res.data = { name, email, password, avatar, date, _id };
 // Failure 400. Each is a string with error information to display in front end.
 res.data = { name, email, password, password2 };
 ```
@@ -39,11 +39,11 @@ res.data = { name, email, password, password2 };
 #### POST /api/users/login
 
 ```javascript
-reqBody = {email, password};
+reqBody = { email, password };
 // Success 200.
-res.data = {success=true, token};
+res.data = { success: true, token };
 // Failure 400.
-res.data = {email, password};
+res.data = { email, password };
 ```
 
 #### GET /api/users/current
@@ -61,9 +61,22 @@ res.data = { id, name, email };
 ```javascript
 // Send request with Authorization header filled with JWT
 // Success 200.
-res.data = {social={}, skills=[], user={_id, name, avatar}, handle, status, experience=[{current, _id, title, company, location, from, to, description} ], education=[{current, _id, school, degree, fieldofstudy, from, to, description}], date};
+res.data = {
+  social: {},
+  skills: [],
+  user: { _id, name, avatar },
+  handle,
+  status,
+  experience: [
+    { current, _id, title, company, location, from, to, description }
+  ],
+  education: [
+    { current, _id, school, degree, fieldofstudy, from, to, description }
+  ],
+  date
+};
 // Fail 404. Each is a string with error information.
-res.data = {noprofile}
+res.data = { noprofile };
 ```
 
 #### GET /api/profile/all
@@ -96,11 +109,24 @@ res.data = { noprofile };
 #### POST api/profile
 
 ```javascript
-reqBody = {handle, status, skills="", website, youtube, twitter, facebook, linkedin, instagram, location, bio, githubusername};
+reqBody = {
+  handle,
+  status,
+  skills: "",
+  website,
+  youtube,
+  twitter,
+  facebook,
+  linkedin,
+  instagram,
+  location,
+  bio,
+  githubusername
+};
 // Success 200
 res.data = profile;
 // Fail 400.
-res.data = {handle: "That handle already exists."}
+res.data = { handle: "That handle already exists." };
 ```
 
 #### POST api/profile/experience
@@ -138,4 +164,98 @@ res.data = profile;
 ```javascript
 // Success 200
 res.data = { success: true };
+```
+
+### /api/posts
+
+#### GET api/posts
+
+```javascript
+// Success 200
+res.data = [
+  {
+    text,
+    name,
+    avatar,
+    user,
+    likes: [{ user }],
+    comments: [{ user, text, name, avatar, date }],
+    date
+  }
+];
+// Fail 404. Each is a string with error information.
+res.data = { nopostsfound: "No posts found" };
+```
+
+#### GET api/posts/:id
+
+```javascript
+// Success 200
+res.data = post;
+// Fail 404. Each is a string with error information.
+res.data = { nopostsfound: "No post found with that ID" };
+```
+
+#### POST api/posts
+
+```javascript
+reqBody = { text };
+// Success 200.
+res.data = post;
+// Fail 400. Each is a string with error information.
+res.data = { text };
+```
+
+#### DELETE api/posts/:id
+
+```javascript
+// Success 200.
+res.data = { success: true };
+// Fail 404.
+res.data = { postnotfound: "No post found" };
+// Fail 401.
+res.data = { notauthorized: "User not authorized" };
+```
+
+#### POST api/posts/like/:id
+
+```javascript
+// Success 200.
+res.data = post;
+// Fail 404.
+res.data = { postnotfound: "No post found" };
+// Fail 400.
+res.data = { alreadyliked: "User already liked this post" };
+```
+
+#### POST api/posts/unlike/:id
+
+```javascript
+// Success 200.
+res.data = post;
+// Fail 404.
+res.data = { postnotfound: "No post found" };
+// Fail 400.
+res.data = { notliked: "You have not yet liked this post" };
+```
+
+#### POST api/posts/comment/:id
+
+```javascript
+reqBody = { text };
+// Success 200.
+res.data = post;
+// Fail 404.
+res.data = { postnotfound: "No post found" };
+```
+
+#### DELETE api/posts/comment/:id/:comment_id
+
+```javascript
+// Success 200.
+res.data = post;
+// Fail 404.
+res.data = { postnotfound: "No post found" };
+// Fail 404.
+res.data = { commentnotexists: "Comment does not exist" };
 ```
