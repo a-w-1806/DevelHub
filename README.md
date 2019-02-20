@@ -20,7 +20,7 @@ The front end code is in the <a href="https://github.com/Yuchen-Wang-SH/DevelHub
   - Encrypt passwords using **bcrypt.js** before storing.
 - A front end UI written using **React**.
   - Manage the state of the whole application using **Redux**.
-  - Get latest five repos from registered users through **Github API**.
+  - Get latest five repos of registered users through **Github API**.
 
 ## Back end routes
 
