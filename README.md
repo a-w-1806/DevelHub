@@ -24,6 +24,7 @@ The front end code is in the <a href="https://github.com/Yuchen-Wang-SH/DevelHub
 - **Docker**
 - **Travis CI**
 - **Nginx** for routing to front end server or back end server.
+- **AWS Elastic Beanstalk** as a deploy option.
 
 ## Back end routes
 
