@@ -23,6 +23,7 @@ The front end code is in the <a href="https://github.com/Yuchen-Wang-SH/DevelHub
   - Get latest five repos of registered users through **GitHub API**.
 - **Docker**
 - **Travis CI**
+- **Nginx** for routing to front end server or back end server.
 
 ## Back end routes
 
