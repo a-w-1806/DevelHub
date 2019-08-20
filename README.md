@@ -4,7 +4,7 @@
 
 **Attention**: If you have trouble opening this web page, please refresh the page to try again since heroku apps hibernate if there is no traffic for a period of time.
 
-The front end code is in the <a href="https://github.com/Yuchen-Wang-SH/DevelHub/tree/master/client" target="_blank">`/client`</a> folder.
+The front end code is in the <a href="https://github.com/Yuchen-Wang-SH/DevelHub/tree/master/client" target="_blank">`/client`</a> folder. The back end code is in the <a href="https://github.com/Yuchen-Wang-SH/DevelHub/tree/master/server" target="_blank">`/server`</a> folder.
 
 ## Main Functionalities
 
@@ -20,7 +20,9 @@ The front end code is in the <a href="https://github.com/Yuchen-Wang-SH/DevelHub
   - Encrypt passwords using **bcrypt.js** before storing.
 - A front end UI written using **React**.
   - Manage the state of the whole application using **Redux**.
-  - Get latest five repos of registered users through **Github API**.
+  - Get latest five repos of registered users through **GitHub API**.
+- **Docker**
+- **Travis CI**
 
 ## Back end routes
 
