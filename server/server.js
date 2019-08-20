@@ -27,9 +27,9 @@ app.use(passport.initialize());
 // Passport config
 require("./config/passport")(passport);
 
-app.use("/api/users", users);
-app.use("/api/profile", profile);
-app.use("/api/posts", posts);
+app.use("/users", users);
+app.use("/profile", profile);
+app.use("/posts", posts);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === "production") {
