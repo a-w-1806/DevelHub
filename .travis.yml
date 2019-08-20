@@ -1,0 +1,35 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t wyc2313/frontend-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true wyc2313/frontend-test npm test
+
+after_success:
+  - docker build -t wyc2313/DevelHub-client ./client
+  - docker build -t wyc2313/DevelHub-nginx ./nginx
+  - docker build -t wyc2313/DevelHub-server ./server
+  # Log in
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take images and push
+  - docker push wyc2313/DevelHub-client
+  - docker push wyc2313/DevelHub-nginx
+  - docker push wyc2313/DevelHub-server
+
+# deploy:
+#   provider: elasticbeanstalk
+#   region: us-east-1
+#   app: DevelHub
+#   env: Develhub-env
+#   bucket_name: elasticbeanstalk-us-east-1-124032501919
+#   bucket_path: DevelHub
+#   on:
+#     branch: master
+#   access_key_id:
+#     secure: $AWS_ACCESS_KEY
+#   secret_access_key:
+#     secure: $AWS_SECRET_KEY
